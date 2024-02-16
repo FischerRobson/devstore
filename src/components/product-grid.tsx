@@ -12,8 +12,6 @@ export function ProductGrid({ isMain = false, product }: ProductGridProps) {
     ? { gridSpan: 6, width: 830 }
     : { gridSpan: 3, width: 450 }
 
-  console.log(sizes)
-
   return (
     <Link
       href="/"

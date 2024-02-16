@@ -1,9 +1,13 @@
 import { ProductGrid } from '@/components/product-grid'
-import { api } from '../data/api'
-import { Product } from '../data/types/product'
+import { api } from '../../data/api'
+import { Product } from '../../data/types/product'
 
-export default async function Home() {
-  const response = await api('/products/featured')
+export default async function HomePage() {
+  const response = await api('/products/featured', {
+    // next: {
+    //   revalidate: 60 * 60,
+    // },
+  })
   const products: Product[] = await response.json()
 
   return (
