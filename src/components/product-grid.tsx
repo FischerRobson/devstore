@@ -14,7 +14,7 @@ export function ProductGrid({ isMain = false, product }: ProductGridProps) {
 
   return (
     <Link
-      href="/"
+      href={`/products/${product.slug}`}
       className={`group relative col-span-${sizes.gridSpan} row-span-${sizes.gridSpan}
       rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-center`}
     >
