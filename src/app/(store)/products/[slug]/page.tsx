@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { api } from '@/app/data/api'
 import { Product } from '@/app/data/types/product'
 import { SizeButton } from '@/components/product-page/size-button'
+import { AddToCartButton } from '@/components/product-page/add-to-cart-button'
 
 type PageParams = {
   params: {
@@ -30,6 +31,18 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   return {
     title: product.title,
   }
+}
+
+// for generate static pages during build
+export async function generateStaticParams() {
+  const response = await api('/products/featured')
+  const data = await response.json()
+
+  return data.map((product: Product) => {
+    return {
+      slug: product.slug,
+    }
+  })
 }
 
 export default async function ProductPage({ params }: PageParams) {
@@ -76,12 +89,7 @@ export default async function ProductPage({ params }: PageParams) {
             <SizeButton size="GG" />
           </div>
         </div>
-        <button
-          type="button"
-          className="mt-8 flex h-12 items-center justify-center bg-emerald-600 font-semibold text-white rounded-full"
-        >
-          Adicionar ao carrinho
-        </button>
+        <AddToCartButton productId={product.id} />
       </div>
     </div>
   )
