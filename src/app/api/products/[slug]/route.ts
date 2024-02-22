@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import data from '../data.json'
-import { NextResponse } from 'next/server'
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } },
-) {
+type GetProductParams = {
+  params: { slug: string }
+}
+
+export async function GET(request: Request, { params }: GetProductParams) {
   const slug = z.string().parse(params.slug)
   const product = data.products.find((e) => e.slug === slug)
 
